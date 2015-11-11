@@ -36,22 +36,21 @@ int IOCP::run(){
 			return 0;
 		}
 		/// client에 sock 저장
-		
-
-
 
 		SockData* newSock = new SockData();
+		IoData* newIoData = this->createIoData();
+
 		newSock->clientSock = clientSock;
 		memcpy(&(newSock->clientAddr), &clientSockAddr, addrLen);
 
-		Client* newClient = new Client(newSock);
+		Client* newClient = new Client(newSock,newIoData);
 		this->clientController->add(newClient);
 
 		//this->clientController->addSock(newSock);
 
 		CreateIoCompletionPort((HANDLE)newSock->clientSock, this->completionPort, (DWORD)newSock, 0);//->cp랑 clinetSock이랑 연결
 
-		IoData* newIoData = this->createIoData();
+		
 		WSARecv(newSock->clientSock, &(newIoData->wasBuf), 1, (LPDWORD)&recvBytes, (LPDWORD)&flags, &(newIoData->overlapped), NULL);// ->recv를 기다린다
 		//this->sockVectors.push_back(newSock);// cLIENT에 대한 소켓 정보 저장
 	}

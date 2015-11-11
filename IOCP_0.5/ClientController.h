@@ -34,7 +34,7 @@ public:
 
 	static ClientController* getInstance();
 
-
+	void removeBySock(SockData* sockData);
 	virtual void add(Observer* newObsever);
 	virtual void remove(Observer* delObserver);
 	virtual void notify(IoData* ioData, SockData* newSockData);

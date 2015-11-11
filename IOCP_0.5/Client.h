@@ -11,14 +11,14 @@ using namespace std;
 class Client : public Observer{
 
 private:
-	SockData* mySockData;
+	
 public:
 	Client();
-	Client(SockData* SockData){
-		this->mySockData = SockData;
+	Client(SockData* sockData,IoData* ioData){
+		this->mySockData = sockData;
+		this->myIoData = ioData;
 	}
 	void virtual update(IoData* ioData, int option);
-	void setSock(SockData* newSock);
 };
 
 #endif

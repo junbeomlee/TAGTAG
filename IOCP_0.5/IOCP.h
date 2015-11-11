@@ -11,6 +11,7 @@
 #include "ClientController.h"
 #include "Client.h"
 
+
 #pragma comment(lib,"Ws2_32.lib")
 
 using namespace std;
@@ -36,7 +37,7 @@ public:
 	int run();
 	int acceptClient();
 	int setServerPort();
-	IoData* createIoData();
+	static IoData* createIoData();
 };
 
 

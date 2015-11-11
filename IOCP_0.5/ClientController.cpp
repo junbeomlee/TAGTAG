@@ -12,9 +12,17 @@ ClientController* ClientController::getInstance(){
 	return clientControllerInstance;
 }
 
-
+void ClientController::removeBySock(SockData* sockData){
+	for (int i = 0; i < this->clientObserver.size(); i++){
+		if (this->clientObserver.at(i)->getSock() == sockData){
+			this->clientObserver.erase(this->clientObserver.begin() + i);
+			cout << "client disconnected \n";
+		}
+	}
+}
 void ClientController::add(Observer* newObserver){
 	this->clientObserver.push_back(newObserver);
+	cout << "connection created \n";
 }
 
 void ClientController::remove(Observer* delObserver){
@@ -26,7 +34,10 @@ void ClientController::remove(Observer* delObserver){
 }
 
 void ClientController::notify(IoData* ioData,SockData* newSockData){
+
+	
 	for (int i = 0; i < this->clientObserver.size(); i++){
+
 		int sendMessage = 1;
 		
 		if (ioData->buffer == 0){

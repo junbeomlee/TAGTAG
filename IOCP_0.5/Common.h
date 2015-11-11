@@ -17,4 +17,16 @@ typedef struct{
 	int rwMode;
 }IoData;
 
+typedef struct {
+	int size;
+	int type;
+}Header;
+
+typedef struct {
+	Header header;
+	char buffer[1024];
+}Packet;
+
+///-> wasbuf에 압축해서 보내기
+
 #endif
